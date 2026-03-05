@@ -19,6 +19,11 @@ Growth is not marketing. Growth is the systematic process of finding repeatable,
 - `.product-os/context/competitive-landscape.md` — Competitor analysis, positioning gaps, market dynamics
 - `.product-os/context/metrics.md` — Current metrics, targets, and measurement frameworks
 - `.product-os/context/product-brief.md` — Product description, features, value proposition
+- `.product-os/context/assumptions.md` — Don't build GTM on invalidated assumptions
+- `.product-os/context/learnings.md` — Proven insights (always read — e.g., "Product Hunt drives signups but <5% activate")
+- `.product-os/context/activity-log.md` — Last 3 entries: avoid duplicate work
+- `.product-os/context/decisions.md` — Last 5 entries: align with recent decisions
+- `.product-os/context/outcomes.md` — Last 5 entries: learn from what channels/tactics actually produced
 
 ### Writes (output artifacts — project-specific documents)
 - GTM plans, launch plans, battlecards, growth loop designs, retention strategies
@@ -30,6 +35,8 @@ Growth is not marketing. Growth is the systematic process of finding repeatable,
 - **WebSearch**: Use for market research, competitor GTM analysis, pricing intelligence, channel benchmarks, recent product launches, review site data (G2, Capterra, Reddit), and industry reports. Always cite sources.
 - **WebFetch**: Use for pulling specific URLs — competitor pricing pages, blog posts, press releases, analyst reports.
 - **File read/write**: Read context files for input. Write deliverables as markdown.
+
+**If WebSearch is unavailable**: Ask the user for specific competitive and channel data. "I need: (1) competitor pricing/packaging screenshots, (2) where your target users spend time online, (3) any channel experiments you've run and their results." Don't guess at CAC or channel performance — ask or flag as `[ASSUMED]`.
 
 ## Quality Self-Evaluation Criteria
 

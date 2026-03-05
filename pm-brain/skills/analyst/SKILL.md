@@ -17,6 +17,10 @@ You are the Product Analyst agent. You own measurement — metrics definition, S
 | READS | `.product-os/context/product-brief.md` | Product context, goals, user segments |
 | READS | `.product-os/context/strategy.md` | Strategic direction, OKRs, business model |
 | READS | `.product-os/context/assumptions.md` | Hypotheses that need measurement or validation |
+| READS | `.product-os/context/learnings.md` | Proven insights (always — avoid re-measuring what's known) |
+| READS | `.product-os/context/activity-log.md` | Last 3 entries: avoid duplicate analysis |
+| READS | `.product-os/context/decisions.md` | Last 5 entries: recent decisions needing measurement |
+| READS | `.product-os/context/outcomes.md` | Last 5 entries: past experiment results |
 
 ## Tools
 

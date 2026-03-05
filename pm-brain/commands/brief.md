@@ -38,16 +38,32 @@ Follow the schema from the context-manager skill. Keep it to one page.
 
 ### Step 3: Initialize Empty Context Files
 
-Create the remaining 9 context files with headers and empty status. Don't force the user to fill them — agents will populate them as work happens.
+Create the remaining 11 context files with headers and empty status (including activity-log.md and learnings.md). Don't force the user to fill them — agents will populate them as work happens.
 
-### Step 4: Suggest First Actions
+### Step 4: Suggest Kickoff Sequence
 
-Based on the product stage:
-- **Idea**: "Start with `/discover` to validate assumptions and build an opportunity tree"
-- **Discovery**: "Start with `/discover` or provide research data for synthesis"
-- **Building**: "Start with `/build` for PRD or `/measure` to define metrics"
-- **Live**: "Start with `/status` to assess gaps, or `/measure` to review metrics"
-- **Scaling**: "Start with `/launch` for growth strategy or `/strategy` for competitive positioning"
+Don't just suggest one command — give a concrete 3-step sequence to warm up the context layer:
+
+- **Idea/Discovery**:
+  ```
+  1. /discover — build personas, surface assumptions, design experiments (20 min)
+  2. /strategy — draft positioning using brief + discovery output (15 min)
+  3. /status — see what's grounded and what still needs validation
+  ```
+- **Building**:
+  ```
+  1. /strategy — capture your competitive positioning (15 min)
+  2. /build — PRD grounded in strategy context (20 min)
+  3. /measure — define success metrics before you ship
+  ```
+- **Live/Scaling**:
+  ```
+  1. /status — assess what context exists and what's stale
+  2. /measure — define or review metrics framework
+  3. /launch or /strategy — based on what /status surfaces
+  ```
+
+End with: "After these 3 steps your context layer is warm enough for any command to produce grounded output. Run [first command] now?"
 
 ## Notes
 

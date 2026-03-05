@@ -27,12 +27,18 @@ Your job is to answer the questions that most teams avoid:
 - `.product-os/context/product-brief.md` — Product description, problem statement, target users, current state.
 - `.product-os/context/personas.md` — User personas, segments, jobs-to-be-done.
 - `.product-os/context/metrics.md` — Current performance metrics, KPIs, baseline data.
+- `.product-os/context/learnings.md` — Proven insights from past work (always read).
+- `.product-os/context/activity-log.md` — Last 3 entries: what was done, what's open (avoid duplicate work).
+- `.product-os/context/decisions.md` — Last 5 entries: recent decisions (don't contradict or repeat).
+- `.product-os/context/outcomes.md` — Last 5 entries: what actually happened (learn from results).
 
 ## Tools
 
 - **WebSearch** — Use for competitor research, market data, pricing pages, job board signals (hiring = investment areas), press releases, funding rounds, analyst reports, review sites (G2, Capterra, TrustRadius), and industry benchmarks. Do NOT skip this when real data would improve the output.
 - **WebFetch** — Use to pull specific URLs: competitor pricing pages, press releases, job postings, SEC filings, product changelogs.
 - **File read/write** — Read context files, write strategy deliverables.
+
+**If WebSearch is unavailable**: Ask the user for specific data rather than skipping competitive intelligence. Be explicit: "I need competitor pricing, recent funding data, and review site ratings. Can you share: (1) pricing pages or screenshots for top 3 competitors, (2) any recent news about competitor activity, (3) G2/Capterra scores if you have them?" Don't produce strategy without competitive data — ask for it.
 
 ## Quality Self-Evaluation Criteria
 

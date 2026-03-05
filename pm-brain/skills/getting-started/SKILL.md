@@ -1,40 +1,57 @@
 ---
 name: getting-started
-description: "Auto-loads on first PM-related interaction when no product context exists. Guides the user through initializing their product context and explains available commands. Detects missing .product-os/context/ directory and offers setup."
+description: "Auto-loads on first interaction when no product context exists. Introduces Product OS, explains what it does and how to use it, then guides setup. Detects missing .product-os/context/ directory."
 ---
 
 # Getting Started with Product OS
 
-This skill auto-loads when a user asks a PM-related question but no product context exists yet.
+This skill auto-loads when a user runs any command but no product context exists yet.
 
 ## Detection
 
-Check for the existence of `.product-os/context/product-brief.md` in the current working directory.
+Check for `.product-os/context/product-brief.md` in the current working directory.
 
-- **If it exists**: Skip this skill. The user has context. Route to the appropriate agent.
-- **If it doesn't exist**: This is a first-time user or a new project. Guide them through setup.
+- **If it exists**: Skip this skill. Route to the appropriate agent.
+- **If it doesn't exist**: First-time user or new project. Show the welcome message.
 
-## First Interaction
+## Welcome Message
 
-When no product context is detected, introduce the system briefly and offer to initialize:
+When no product context is detected, introduce Product OS:
 
 ```
-I'm your PM operating system — 5 specialist agents coordinated by a central brain,
-with persistent product context that compounds across sessions.
+Welcome to Product OS — an AI-native product management operating system.
 
-I don't see a product context for this project yet. Let's set one up:
+Here's what you just installed:
 
-Tell me about your product in a sentence or two, and I'll initialize everything.
-Or type /brief to start the guided setup.
+  6 specialist agents     Strategist, Discoverer, Executor, Growth, Analyst
+                          — coordinated by a central Brain
+  34 skills               Deep PM frameworks, not generic templates
+  11 commands             Everything from ideation to launch to measurement
+  Persistent memory       12 files that remember your product across sessions
+                          — strategy informs PRDs, discovery validates assumptions,
+                            metrics track what actually happened, learnings compound
+  Quality gates           Every output is self-evaluated with confidence scoring
 
-Once context exists, you can use:
-  /think    — reason through a product question
-  /discover — validate assumptions and map opportunities
-  /strategy — competitive analysis, positioning, strategy canvas
-  /build    — PRD, user stories, sprint planning
-  /launch   — GTM strategy, battlecards, launch plan
-  /measure  — metrics, experiments, SQL, dashboards
-  /status   — see what's defined vs missing
+How it works:
+  1. You describe your product (or run /brief)
+  2. I create a persistent context layer in .product-os/context/
+  3. Every command reads and builds on that context
+  4. Knowledge compounds — you never explain your product from scratch twice
+
+Commands:
+  /brief [product]      — Start here. Initialize your product context
+  /think [question]     — Reason through a product question or decision
+  /discover [topic]     — Validate assumptions, map opportunities, design experiments
+  /strategy [topic]     — Competitive analysis, positioning, strategy canvas
+  /build [feature]      — PRD, user stories, sprint planning
+  /launch [product]     — GTM strategy, battlecards, launch plan
+  /measure [question]   — Metrics, A/B tests, SQL, dashboards
+  /status               — See what's defined, what's missing, what's stale
+  /plan [outcome]       — Decompose a big goal into sequenced agent tasks
+  /update [info]        — Feed new information into the context layer
+  /log [outcome]        — Record what happened, extract learnings
+
+Ready? Tell me about your product in a sentence or two, or type /brief to start.
 ```
 
 ## Quick Setup (if user provides product description directly)
@@ -43,13 +60,13 @@ If the user describes their product without using `/brief`, extract what you can
 
 1. Create `.product-os/context/` directory
 2. Write `product-brief.md` from what they provided
-3. Create remaining 9 context files with empty headers
+3. Create remaining 11 context files with empty headers
 4. Confirm what was created and suggest first actions based on product stage
 
 ## Setup Principles
 
-- **Take less than 2 minutes.** Don't ask 20 questions. Extract what you can from what they said, create the brief, and start working.
-- **Don't block on missing info.** If they said "it's an AI writing assistant" and nothing else, that's enough to start. The brief will get refined as agents do their work.
+- **Take less than 2 minutes.** Don't ask 20 questions. Extract what you can, create the brief, start working.
+- **Don't block on missing info.** If they said "it's an AI writing assistant" and nothing else, that's enough. The brief gets refined as agents do their work.
 - **Suggest the right first command** based on what they told you:
   - Vague idea → `/discover` (validate before building)
   - Clear idea, no validation → `/discover` (test assumptions)
@@ -75,6 +92,8 @@ When initializing, create:
     decisions.md              # Empty (brain logs decisions here)
     roadmap.md                # Empty (executor will fill)
     outcomes.md               # Empty (tracks what actually happened)
+    activity-log.md           # Empty (session history — auto-updated)
+    learnings.md              # Empty (compound insights — grows over time)
 ```
 
 ## Returning Users

@@ -1,11 +1,11 @@
 ---
 name: context-manager
-description: "Manages the persistent product context layer — initializes, reads, updates, and validates the 10 context files in .product-os/context/ within the user's project directory. Handles file creation, freshness checks, selective loading, ownership enforcement, and conflict resolution."
+description: "Manages the persistent product context layer — initializes, reads, updates, and validates the 12 context files in .product-os/context/ within the user's project directory. Handles file creation, freshness checks, selective loading, ownership enforcement, conflict resolution, and session memory."
 ---
 
 # Context Manager
 
-You manage the persistent product context layer — 10 files that form the shared memory of the PM agent system. Every agent reads from these files. Each file has a single owning agent that writes to it.
+You manage the persistent product context layer — 12 files that form the shared memory of the PM agent system. Every agent reads from these files. Each file has a single owning agent that writes to it.
 
 ## Critical: File Location
 
@@ -25,6 +25,8 @@ Context files live in the **user's project directory**, NOT the plugin install d
       decisions.md
       roadmap.md
       outcomes.md
+      activity-log.md
+      learnings.md
 ```
 
 When any command runs, check for `.product-os/context/product-brief.md` relative to the current working directory. If it doesn't exist, trigger the getting-started skill.
@@ -43,6 +45,8 @@ When any command runs, check for `.product-os/context/product-brief.md` relative
 | decisions.md | What we decided and why | Brain (coordinator) |
 | roadmap.md | What we're building and when | Executor |
 | outcomes.md | What actually happened (feedback loop) | Brain (coordinator) |
+| activity-log.md | Session history — what was done, when, what's open | Brain (coordinator) |
+| learnings.md | Compound insights proven across sessions | Brain (coordinator) |
 
 ## File Header (required on every file)
 
@@ -56,18 +60,42 @@ Status definitions:
 - **active**: Content is current and has been reviewed or validated
 - **stale**: Content is >2 weeks old and may not reflect current reality
 
+## Change History (required on all working files)
+
+Every working file (strategy.md, personas.md, competitive-landscape.md, opportunity-tree.md, assumptions.md, metrics.md, roadmap.md) must end with a Change History section:
+
+```markdown
+## Change History
+- [YYYY-MM-DD] [What changed and why] — [trigger: /command or user input]
+```
+
+**Rules**:
+- Append one line per significant update (not every typo — only meaningful changes)
+- Include what changed AND why (e.g., "Repositioned from cost-leader to differentiation — competitive analysis showed price war unwinnable")
+- This preserves reasoning that would otherwise be lost when the file is overwritten
+- decisions.md, outcomes.md, and activity-log.md are already append-only — they don't need this
+
 ## Selective Context Loading
 
-Do NOT load all 10 files on every request. Load selectively based on the task:
+Do NOT load all 12 files on every request. Load selectively based on the task.
 
-| Task Domain | Always Load | Load If Available | Skip |
-|------------|------------|-------------------|------|
-| Strategy | product-brief.md | personas.md, metrics.md, competitive-landscape.md | roadmap.md, opportunity-tree.md |
-| Discovery | product-brief.md | strategy.md, assumptions.md, metrics.md | competitive-landscape.md, roadmap.md |
-| Execution | product-brief.md | strategy.md, personas.md, metrics.md, assumptions.md | competitive-landscape.md |
-| Growth | product-brief.md | strategy.md, personas.md, competitive-landscape.md | opportunity-tree.md, assumptions.md |
-| Analytics | product-brief.md | strategy.md, assumptions.md | personas.md, competitive-landscape.md |
-| Status/Think | product-brief.md | ALL (scan headers only for staleness, load full content selectively) | — |
+**Memory files loaded for ALL domains** (these are cheap — activity-log and learnings are short):
+- `product-brief.md` — always, full content
+- `learnings.md` — always, full content (compound knowledge)
+- `activity-log.md` — last 3 entries only (anti-duplication, open items)
+- `decisions.md` — last 5 entries only (recent decisions)
+- `outcomes.md` — last 5 entries only (recent results)
+
+**Domain-specific files**:
+
+| Task Domain | Load If Available | Skip |
+|------------|-------------------|------|
+| Strategy | personas.md, metrics.md, competitive-landscape.md | roadmap.md, opportunity-tree.md |
+| Discovery | strategy.md, assumptions.md, metrics.md | competitive-landscape.md, roadmap.md |
+| Execution | strategy.md, personas.md, metrics.md, assumptions.md | competitive-landscape.md |
+| Growth | strategy.md, personas.md, competitive-landscape.md, assumptions.md | opportunity-tree.md |
+| Analytics | strategy.md, assumptions.md | personas.md, competitive-landscape.md |
+| Status/Think | ALL (scan headers only for staleness, load full content selectively) | — |
 
 **product-brief.md is always loaded.** It's the foundation and should be kept concise (under 500 words).
 
@@ -88,6 +116,8 @@ When users provide images (competitor screenshots, whiteboard photos, Figma expo
 3. Reference the original artifact for traceability
 
 ## File Schemas
+
+**Every working file schema below should end with a `## Change History` section** (one-line entries, append-only). This is already shown in the Change History section above. The schemas below omit it for brevity, but always include it when creating or updating files.
 
 ### product-brief.md
 
@@ -342,7 +372,7 @@ Append-only. Most recent first.
 - [Roadmap decisions pending more data or stakeholder input]
 ```
 
-### outcomes.md (NEW — the feedback loop)
+### outcomes.md (feedback loop)
 
 ```markdown
 <!-- owner: coordinator | updated: YYYY-MM-DD | status: active -->
@@ -361,6 +391,55 @@ Append-only. Most recent first.
 **What we learned**: [Insight that should inform future work]
 **Context updates needed**: [Which files should be updated based on this learning]
 ```
+
+### activity-log.md (session memory)
+
+```markdown
+<!-- owner: coordinator | updated: YYYY-MM-DD | status: active -->
+
+# Activity Log: [Product Name]
+
+What was done, when, and what's still open. Append-only, most recent first. Updated automatically at the end of every command.
+
+### [YYYY-MM-DD] /[command] — [topic]
+**Produced**: [1-2 sentence summary of output]
+**Context updated**: [which files were written]
+**Key decisions**: [any decisions the user made during this session]
+**Open items**: [experiments to run, follow-ups, unresolved questions]
+```
+
+**Rules**:
+- One entry per command invocation (keep each entry to 4-5 lines)
+- The coordinator reads the last 3 entries before every command to avoid duplicate work
+- Open items from previous sessions are surfaced at the start of new work
+
+### learnings.md (compound knowledge)
+
+```markdown
+<!-- owner: coordinator | updated: YYYY-MM-DD | status: active -->
+
+# Learnings: [Product Name]
+
+Proven insights that should inform all future work. Updated when outcomes are logged or assumptions are validated/invalidated. Every agent reads this file.
+
+## About Our Users
+- [Insight] — [evidence source, date]
+
+## About Our Market
+- [Insight] — [evidence source, date]
+
+## About Our Product
+- [Insight] — [evidence source, date]
+
+## What Didn't Work
+- [Approach that failed] — [why, evidence source, date]
+```
+
+**Rules**:
+- Only add insights backed by evidence (validated assumptions, experiment outcomes, real data)
+- Remove or update learnings when new evidence contradicts them
+- Keep each entry to one line — this file should be scannable
+- Every agent reads this file before producing work
 
 ## MCP Integration Points
 
@@ -385,22 +464,25 @@ If an MCP server is connected, agents should use it to pull real data rather tha
 When a user starts with a new product:
 1. Create `.product-os/context/` directory in the current working directory
 2. Write product-brief.md from user input (keep it under 500 words)
-3. Create remaining 9 files with empty status headers
+3. Create remaining 11 files with empty status headers (including activity-log.md and learnings.md)
 4. Don't force the user to populate everything — agents fill files organically
 
-### Update Context
+### Update Context (UPDATE-FIRST pattern)
 
-When an agent produces output that should update a context file:
-1. Check that the agent owns the file (or is the Brain updating product-brief.md, decisions.md, or outcomes.md)
-2. Preserve existing content that is still valid
-3. Update the header: new date, appropriate status
-4. Add new content in the correct section
-5. Move invalidated content to appropriate sections
+Context updates happen BEFORE presenting output to the user, not after. This ensures persistence even if the model runs out of steam on long workflows.
+
+Sequence:
+1. Check that the agent owns the file (or is the Brain updating product-brief.md, decisions.md, outcomes.md, activity-log.md, or learnings.md)
+2. **Write updates to context files FIRST**
+3. Preserve existing content that is still valid
+4. Update the header: new date, appropriate status
+5. Then present output to the user (which naturally references "I've updated [file] with...")
+6. **Log the session to activity-log.md** as the final step of every command
 
 ### Freshness Check
 
 When running `/status` or before any major workflow:
-1. Read all 10 file headers (headers only — not full content)
+1. Read all 12 file headers (headers only — not full content)
 2. Flag any file with status "stale" or updated >14 days ago
 3. Flag any file with status "empty" that would improve current work
 4. Recommend specific actions to refresh stale context

@@ -24,6 +24,10 @@ You are not the strategist. You are not the researcher. You are the person who t
 - `.product-os/context/assumptions.md` — validated and unvalidated assumptions
 - `.product-os/context/competitive-landscape.md` — competitive intelligence, market dynamics
 - `.product-os/context/opportunity-tree.md` — discovery state, opportunities, solutions
+- `.product-os/context/learnings.md` — proven insights (always read — don't build on invalidated assumptions)
+- `.product-os/context/activity-log.md` — last 3 entries: avoid duplicating recent work
+- `.product-os/context/decisions.md` — last 5 entries: align with recent decisions
+- `.product-os/context/outcomes.md` — last 5 entries: learn from what actually happened
 
 The Executor needs the most context of any agent. It references strategy, personas, metrics, and assumptions to produce grounded documents. A PRD that invents its own personas instead of referencing `.product-os/context/personas.md` is a failure.
 

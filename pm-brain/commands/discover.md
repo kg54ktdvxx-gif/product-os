@@ -1,207 +1,60 @@
 ---
 name: discover
-description: "Run a full discovery cycle — from context review through ideation, assumption mapping, and experiment design to a complete discovery plan with updated context files."
+description: "Run a discovery cycle — assumption mapping, experiment design, and validation planning. Scope adapts to the question."
 argument-hint: "<product or feature idea>"
 ---
 
-# /discover -- Full Discovery Cycle
+# /discover — Discovery Cycle
 
-Run a structured product discovery process that moves from understanding through divergent thinking to focused validation. This command produces a complete discovery plan and updates all relevant context files.
+Run a structured product discovery process. Follows the discoverer skill's operating protocol (context loading, quality evaluation, context updates). Steps below define what to produce.
 
 ## Invocation
 
 ```
 /discover Smart notification system for our project management tool
-/discover New product: AI writing assistant for non-native speakers
-/discover                    # interactive mode — asks what you're discovering
+/discover                    # interactive mode
 ```
+
+## Scope Detection
+
+Match output depth to the request:
+
+- **Narrow question** ("Should we add dark mode?"): Identify 3-5 assumptions, design 1-2 experiments, done. ~500 words.
+- **Feature exploration** ("Smart notifications"): Brainstorm ideas, map assumptions, design experiments. ~1,000 words.
+- **Full discovery cycle** ("New product idea" or `--deep`): All steps below. ~2,000 words.
+
+Default to focused. Go deep only when asked or when the scope demands it.
 
 ## Workflow
 
-### Step 1: Read Context and Determine Product Stage
+### Step 1: Determine Stage
 
-**Read context files**:
-- `product-brief.md` — product vision, target users, problem statement
-- `strategy.md` — strategic bets, competitive positioning, constraints
-- `metrics.md` — North Star metric, current performance data
-- `personas.md` — existing user personas (if any)
-- `opportunity-tree.md` — existing opportunity mapping (if any)
-- `assumptions.md` — previously identified and tracked assumptions (if any)
+- **Existing product**: Real users, real data. Use 4 core risk categories. Design A/B tests, fake doors.
+- **New product**: No validated demand. Use 8 extended risk categories. Focus on desirability. Design pretotype experiments.
 
-**Determine product stage**:
-- **Existing product (continuous discovery)**: Real users, real data, established product. Use 4 core risk categories. Ground ideas in observed behavior. Design A/B tests, fake doors, prototypes.
-- **New product (initial discovery)**: No validated demand. Use 8 extended risk categories. Focus on desirability first. Design pretotype experiments, XYZ hypotheses.
+### Step 2: Check What We Already Know
 
-If the stage is unclear, ask: "Is this for an existing product with real users, or a new product concept that hasn't been validated yet?"
+Review `assumptions.md`: what's validated, invalidated, untested? Brief summary: "[X] validated, [Y] invalidated, [Z] untested. Biggest gaps: [list]."
 
-### Step 2: Check Existing Knowledge
+### Step 3: Brainstorm & Score (if scope warrants)
 
-Review `assumptions.md` to understand what's already known:
-- What assumptions have been tested and validated?
-- What assumptions have been tested and invalidated?
-- What assumptions are currently being tested?
-- What assumptions have been identified but not yet tested?
+Generate ideas from PM/Designer/Engineer perspectives. Score each on Desirability, Viability, Feasibility, Differentiation, Evidence Base. Present top ideas ranked by composite.
 
-Present a brief summary: "Here's what we know and don't know. [X] assumptions validated, [Y] invalidated, [Z] untested. The biggest knowledge gaps are: [list]."
+### Step 4: Map Assumptions
 
-If `assumptions.md` doesn't exist, note: "No assumption tracking found. We're starting from scratch — extra rigor needed."
+For selected ideas, extract assumptions with: Category, Impact (1-5), Evidence Level (None→Validated), Priority Score. Identify leap-of-faith assumptions (Impact ≥ 4, Evidence = None/Anecdotal).
 
-### Step 3: Brainstorm Ideas with Quality Evaluation
+### Step 5: Design Experiments
 
-Generate ideas from three perspectives (PM, Designer, Engineer). For each idea, evaluate on the Idea Quality Scorecard:
+For each high-priority assumption:
+- Hypothesis (specific, falsifiable)
+- Method (cheapest viable: data analysis → fake door → prototype → A/B)
+- Success threshold (specific number)
+- Decision framework (if X → proceed, if Y → investigate, if Z → kill)
+- Effort and timeline
 
-| Dimension | Score (1-5) |
-|-----------|-------------|
-| Desirability | [evidence-based rating] |
-| Viability | [business model assessment] |
-| Feasibility | [technical assessment] |
-| Differentiation | [competitive assessment] |
-| Evidence Base | [quality of supporting evidence] |
-| **Composite** | **[average]** |
+Sequence: cheapest first, dependency order, leap-of-faith first.
 
-Present the top 10 ideas ranked by composite score.
+### Step 6: Update Context
 
-**Checkpoint**: "Here are 10 ideas with quality scores. Which ones should we stress-test? Pick 3-5 to carry forward, or I'll take the top 5 by score."
-
-### Step 4: Map Assumptions with Risk x Evidence Ratings
-
-For each selected idea, extract assumptions across risk categories and rate each:
-
-| Assumption | Category | Impact (1-5) | Evidence Level | Priority Score |
-|-----------|----------|-------------|----------------|---------------|
-| [assumption] | [Value/Usability/Viability/Feasibility/...] | [1-5] | [None/Anecdotal/Qualitative/Quantitative/Validated] | [Impact x Uncertainty] |
-
-Evidence Level mapping to Uncertainty score:
-- None = 5
-- Anecdotal = 4
-- Qualitative = 3
-- Quantitative = 2
-- Validated = 1
-
-### Step 5: Prioritize and Identify Leap-of-Faith Assumptions
-
-Plot assumptions on the Impact x Uncertainty matrix:
-
-```
-EXPERIMENT (test first)  |  INVESTIGATE (gather info)
-High Impact, High Uncert.|  Low Impact, High Uncert.
--------------------------+-------------------------
-PROCEED (move forward)   |  DEFER (revisit later)
-High Impact, Low Uncert. |  Low Impact, Low Uncert.
-```
-
-Identify leap-of-faith assumptions: Impact >= 4 AND Evidence Level = None or Anecdotal.
-
-**Checkpoint**: "Here are the riskiest assumptions. The leap-of-faith assumptions are: [list]. Which feel most critical to validate first?"
-
-### Step 6: Design Experiments with Decision Frameworks
-
-For each high-priority assumption, design an experiment:
-
-```
-ASSUMPTION: [specific, falsifiable hypothesis]
-EXPERIMENT: [method — fake door, prototype, A/B test, landing page, etc.]
-METRIC: [what to measure]
-SUCCESS THRESHOLD: [specific number]
-DECISION FRAMEWORK:
-  If [metric] > [threshold A]: PROCEED to [next step]
-  If [metric] between [threshold B] and [threshold A]: INVESTIGATE with [method]
-  If [metric] < [threshold B]: KILL or PIVOT to [alternative]
-EFFORT: [T-shirt size + person-days]
-TIMELINE: [start date -> end date]
-DEPENDENCIES: [what needs to be true for this experiment to run]
-```
-
-Sequence experiments by:
-1. Cheapest first (data analysis before fake doors before prototypes before A/B tests)
-2. Dependency order (if Experiment B depends on Experiment A's result, A runs first)
-3. Leap-of-faith first (test the most dangerous assumption before investing in less risky ones)
-
-### Step 7: Compile Discovery Plan
-
-```
-## Discovery Plan: [Topic]
-
-**Date**: [today]
-**Product Stage**: [existing / new]
-**Discovery Question**: [the core question we're trying to answer]
-
-### Context Summary
-[Brief summary of product brief, strategy, existing knowledge]
-
-### Ideas Explored
-| Rank | Idea | Composite Score | Top Strength | Top Risk |
-|------|------|----------------|--------------|---------|
-
-### Selected Ideas for Validation
-[3-5 ideas with rationale for selection]
-
-### Critical Assumptions
-| # | Assumption | Category | Impact | Evidence | Priority | Quadrant |
-|---|-----------|----------|--------|----------|----------|----------|
-
-### Leap-of-Faith Assumptions
-[The 1-3 assumptions that, if wrong, invalidate the entire direction]
-
-### Validation Experiments
-| # | Tests Assumption | Method | Success Criteria | Decision Framework | Effort | Timeline |
-|---|-----------------|--------|-----------------|-------------------|--------|----------|
-
-### Experiment Details
-[For each experiment: full description, setup steps, measurement plan, decision criteria]
-
-### Discovery Timeline
-Week 1: [experiments and activities]
-Week 2: [experiments and activities]
-Week 3: [analysis, synthesis, and decision]
-
-### Decision Framework
-- If Experiment 1 succeeds AND Experiment 2 succeeds -> proceed to [PRD / prototype / MVP]
-- If Experiment 1 succeeds AND Experiment 2 fails -> [pivot approach, keep opportunity]
-- If Experiment 1 fails -> [kill direction, explore alternative opportunities]
-
-### Risks and Mitigations
-[What could go wrong with the discovery process itself?]
-```
-
-### Step 8: Update Context Files
-
-Update the following files based on the discovery plan:
-
-**personas.md**: Add or refine personas based on any new understanding of users from this discovery cycle.
-
-**opportunity-tree.md**: Add new opportunities identified during ideation. Update scores. Add solutions and planned experiments under the appropriate opportunities.
-
-**assumptions.md**: Add all newly identified assumptions to the tracker with their current status (Identified, Prioritized, or Planned for Testing). Update any previously tracked assumptions that were informed by this discovery cycle.
-
-### Step 9: Offer Next Steps
-
-Based on the discovery plan, suggest concrete next actions routed to the appropriate agent or activity:
-
-- "Run the planned experiments" -> Discoverer (self)
-- "Prepare interview scripts to supplement Experiment #2" -> `/discover interview prep [topic]`
-- "Draft a PRD for the top idea (after validation)" -> `/build [feature]`
-- "Update the product strategy to reflect these findings" -> `/strategy [topic]`
-- "Set up metrics to track experiment outcomes" -> `/measure [topic]`
-- "Prioritize the validated features for the roadmap" -> `/build prioritize [features]`
-
-## Quality Checklist (Before Delivering)
-
-- [ ] Every idea has a composite quality score, not just a ranking
-- [ ] Every assumption has a risk category, impact score, and evidence level
-- [ ] Every experiment has a specific success threshold and decision framework
-- [ ] The opportunity tree connects to a measurable outcome
-- [ ] No features disguised as opportunities
-- [ ] No user claims without evidence sources
-- [ ] The discovery plan has a timeline and explicit decision criteria
-- [ ] Context files are updated
-
-## Notes
-
-- This is a 20-40 minute structured workflow. Let the user know upfront.
-- At each checkpoint, the user can redirect, skip, or go deeper.
-- If the user has research data (interviews, analytics, survey results), extract insights before brainstorming.
-- The discovery plan should be a living document — offer to update it as experiments complete.
-- For new products, emphasize desirability validation before feasibility.
-- For existing products, always check if analytics can answer the question before designing a new experiment.
-- The Discoverer's bias should be toward "we don't know enough" rather than "this looks good enough."
+Write to: `personas.md` (if refined), `opportunity-tree.md` (new branches), `assumptions.md` (new entries with status).

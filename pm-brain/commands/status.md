@@ -6,7 +6,7 @@ argument-hint: ""
 
 # /status — Product State Synthesis
 
-Read all 10 context files and produce a one-page state-of-the-product summary with prioritized next actions.
+Read all 12 context files and produce a one-page state-of-the-product summary with prioritized next actions.
 
 ## Invocation
 
@@ -20,7 +20,7 @@ Read all 10 context files and produce a one-page state-of-the-product summary wi
 
 ### Step 1: Read All Context Files
 
-Read every file in the context/ directory. For each, note:
+Read all 12 files in the context/ directory. For each, note:
 - Exists? (yes/no)
 - Status from header (empty/draft/active/stale)
 - Last updated date
@@ -58,6 +58,15 @@ Produce:
 
 ### Stale Context
 - [Files updated >14 days ago that may not reflect reality]
+
+### Open Items (from activity-log.md)
+- [Unresolved items from recent sessions — experiments to run, follow-ups pending]
+
+### Key Learnings (from learnings.md)
+- [Top 3-5 proven insights that should inform current work]
+
+### Unlogged Outcomes
+- [Decisions >30 days old without corresponding outcome in outcomes.md]
 
 ### Top 3 Actions This Week
 1. [Specific, actionable — names the agent and command to use]

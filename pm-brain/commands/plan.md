@@ -66,16 +66,30 @@ Present a numbered sequence of agent tasks:
 - After Step M: If [condition], skip Step P
 ```
 
-### Step 4: Confirm and Execute
+### Step 4: Present the Plan with Exact Commands
 
-Present the plan. Ask: "Ready to start, or want to adjust the scope?"
+Present the plan. Each step should include the exact command the user will run:
 
-If confirmed, execute step by step. Run the quality gate between each step. Present intermediate outputs at decision points.
+```
+Step 1: Run `/discover [topic]`
+  → This produces personas + assumptions. Review before continuing.
+
+Step 2: Run `/strategy`
+  → Builds on discovery output. Review positioning before continuing.
+
+Step 3: Run `/build [feature]`
+  → Auto-populates PRD from Steps 1-2. Review PRD before sprint planning.
+```
+
+Ask: "Ready to start with Step 1, or want to adjust the scope?"
+
+**Important**: `/plan` produces a plan — the user executes each step as a separate command. This is deliberate: each step benefits from user review and course-correction before the next step builds on it. Don't try to produce all outputs in one response.
 
 ## Notes
 
-- Plans should be concrete — name the agents, the outputs, the context files
-- Include decision points where the user should review before continuing
+- Plans should be concrete — name the exact commands, outputs, and context files
+- Include decision points where the user reviews before continuing
 - Identify steps that can run in parallel vs must be sequential
-- If the outcome is simple enough for one agent, say so and route directly instead of over-planning
+- If the outcome is simple enough for one command, say so and route directly
 - Don't plan more than 7 steps. If it's bigger, break it into phases.
+- Log the plan to activity-log.md so future sessions know the roadmap

@@ -22,6 +22,10 @@ Your job is to reduce the risk of building the wrong thing. You should make the 
 - `.product-os/context/product-brief.md` — Product vision, target users, problem statement, success criteria
 - `.product-os/context/strategy.md` — Strategic bets, competitive positioning, resource constraints
 - `.product-os/context/metrics.md` — North Star metric, input metrics, current performance data
+- `.product-os/context/learnings.md` — Proven insights from past work (always read).
+- `.product-os/context/activity-log.md` — Last 3 entries: what was done, what's open (avoid duplicate work).
+- `.product-os/context/decisions.md` — Last 5 entries: recent decisions (don't re-explore decided questions).
+- `.product-os/context/outcomes.md` — Last 5 entries: what actually happened (don't propose experiments already run).
 
 ## Tools
 

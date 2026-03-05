@@ -4,44 +4,14 @@
     "name": "Owen McLoughlin"
   },
   "metadata": {
-    "description": "AI-native PM operating system. 6 coordinated agents with persistent product context, quality gates, and cross-agent workflows.",
+    "description": "AI-native PM operating system. 6 coordinated agents, 34 skills, 11 commands, persistent product context.",
     "version": "2.0.0"
   },
   "plugins": [
     {
       "name": "pm-brain",
-      "description": "PM Chief of Staff — command hub and orchestration layer. All 10 slash commands live here. Routes to specialists, manages context, enforces quality.",
+      "description": "Product OS — AI-native PM operating system. 6 agents, 34 skills, 11 commands, persistent context. One plugin, everything included.",
       "source": "./pm-brain",
-      "category": "product-management"
-    },
-    {
-      "name": "pm-strategist",
-      "description": "Strategy skills: competitive analysis, market assessment, business models, pricing, positioning. No commands — invoked through /strategy.",
-      "source": "./pm-strategist",
-      "category": "product-management"
-    },
-    {
-      "name": "pm-discoverer",
-      "description": "Discovery skills: user research, assumption testing, opportunity mapping, experiment design, feature prioritization. No commands — invoked through /discover.",
-      "source": "./pm-discoverer",
-      "category": "product-management"
-    },
-    {
-      "name": "pm-executor",
-      "description": "Execution skills: PRDs, OKRs, roadmaps, sprints, user stories, stakeholder management, technical specs, AI PM. No commands — invoked through /build.",
-      "source": "./pm-executor",
-      "category": "product-management"
-    },
-    {
-      "name": "pm-growth",
-      "description": "Growth skills: GTM strategy, launch planning, growth loops, positioning, battlecards, PLG, retention. No commands — invoked through /launch.",
-      "source": "./pm-growth",
-      "category": "product-management"
-    },
-    {
-      "name": "pm-analyst",
-      "description": "Analytics skills: metrics definition, SQL generation, A/B test analysis, cohort analysis, experiment design, instrumentation. No commands — invoked through /measure.",
-      "source": "./pm-analyst",
       "category": "product-management"
     }
   ]

@@ -1,21 +1,24 @@
 {
   "name": "pm-brain",
-  "version": "2.0.0",
-  "description": "PM Chief of Staff — the command hub and orchestration layer. All 10 commands live here. Routes to specialist agents, manages persistent product context, enforces quality gates.",
+  "version": "2.1.0",
+  "description": "Product OS — AI-native PM operating system. 6 coordinated agents, 34 skills, 11 commands, persistent product context. From idea to launch to growth.",
   "author": {
-    "name": "Owen McLoughlin",
-    "url": "https://github.com/kg54ktdvxx-gif"
+    "name": "Owen McLoughlin"
   },
   "keywords": [
     "product-management",
-    "coordinator",
-    "orchestration",
-    "context",
     "strategy",
     "discovery",
     "execution",
     "growth",
-    "analytics"
+    "analytics",
+    "prd",
+    "okrs",
+    "competitive-analysis",
+    "user-research",
+    "gtm",
+    "metrics",
+    "ai-pm"
   ],
   "license": "MIT",
   "repository": "https://github.com/kg54ktdvxx-gif/product-os"

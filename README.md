@@ -1,6 +1,6 @@
 # Product OS: AI-Native Product Management Operating System
 
-> 6 coordinated agents, 35+ skills, 10 commands, persistent product context. From idea to launch to growth — with quality gates, real data, and a feedback loop that learns.
+> 6 coordinated agents, 35+ skills, 11 commands, persistent product context. From idea to launch to growth — with quality gates, real data, and a feedback loop that learns.
 
 ## Start Here
 
@@ -25,6 +25,7 @@ Or orchestrate:
 ```
 /plan Take our idea from concept to launch    # Multi-agent workflow
 /update Our competitor just raised $50M       # Intake new context
+/log Conversion up 12% after pricing change   # Close the feedback loop
 ```
 
 ## How It Works
@@ -39,29 +40,20 @@ Product OS is a **layered prompt composition system**. One model, layered instru
 
 No theatrical agent spawning. No 20-minute onboarding. Ask a question, get a rigorous answer.
 
-## The 6 Agents
+## The 6 Agents (one plugin, everything included)
 
-### Brain (pm-brain)
-The coordinator. Routes all requests, manages context, enforces quality. All 10 commands live here.
-
-### Strategist (pm-strategist)
-Product strategy, competitive analysis (with web research), market assessment, business models, pricing, positioning.
-
-### Discoverer (pm-discoverer)
-User research synthesis, assumption testing, opportunity mapping, experiment design, feature prioritization.
-
-### Executor (pm-executor)
-PRDs (auto-populated from context), OKRs, roadmaps, sprints, user stories, stakeholder communication, technical specs, AI product management.
-
-### Growth (pm-growth)
-GTM strategy, launch planning, growth loops, positioning, battlecards, product-led growth, retention strategy.
-
-### Analyst (pm-analyst)
-Metrics definition (with SQL precision), A/B test analysis, cohort analysis, experiment design, analytics instrumentation.
+| Agent | Domain |
+|-------|--------|
+| **Brain** | Coordinator — routes requests, manages context, enforces quality |
+| **Strategist** | Product strategy, competitive analysis, market assessment, business models, pricing, positioning |
+| **Discoverer** | User research, assumption testing, opportunity mapping, experiment design, feature prioritisation |
+| **Executor** | PRDs, OKRs, roadmaps, sprints, user stories, stakeholder comms, technical specs, AI PM |
+| **Growth** | GTM strategy, launch planning, growth loops, positioning, battlecards, PLG, retention |
+| **Analyst** | Metrics definition, SQL generation, A/B test analysis, cohort analysis, instrumentation |
 
 ## The Context Layer
 
-10 persistent files in `.product-os/context/` that compound knowledge across sessions:
+12 persistent files in `.product-os/context/` that compound knowledge across sessions:
 
 ```
 .product-os/context/
@@ -75,9 +67,11 @@ Metrics definition (with SQL precision), A/B test analysis, cohort analysis, exp
   decisions.md              # Brain — what we decided and why
   roadmap.md                # Executor — what we're building
   outcomes.md               # Brain — what actually happened (feedback loop)
+  activity-log.md           # Brain — session history, open items
+  learnings.md              # Brain — proven insights that compound over time
 ```
 
-Context is created automatically when you run `/brief`. Agents update their owned files as work happens. You never explain your product from scratch twice.
+Context is created automatically when you run `/brief`. Agents update their owned files as work happens. You never explain your product from scratch twice. The system checks activity-log.md before every command to avoid repeating work, and reads learnings.md to apply what's already been proven.
 
 ## Quality System
 
@@ -122,38 +116,21 @@ When connected, agents use real data instead of asking you to copy-paste:
 
 ## Installation
 
-### Claude Code (recommended)
-
-Add the marketplace and install all plugins:
+### Claude Code
 
 ```
 /plugin marketplace add kg54ktdvxx-gif/product-os
-```
-
-Then install the plugins:
-
-```
-/plugin install pm-brain@product-os
-/plugin install pm-strategist@product-os
-/plugin install pm-discoverer@product-os
-/plugin install pm-executor@product-os
-/plugin install pm-growth@product-os
-/plugin install pm-analyst@product-os
-```
-
-Or install just the brain (gets all 10 commands):
-
-```
 /plugin install pm-brain@product-os
 ```
 
-> **Note**: The brain has the commands; specialist plugins add deeper skill context. For the full system, install all 6.
+That's it. One plugin, everything included. Run `/brief` to start.
 
 ### Local Development
 
 ```bash
 git clone https://github.com/kg54ktdvxx-gif/product-os.git
 /plugin marketplace add ./product-os
+/plugin install pm-brain@product-os
 ```
 
 ### Other AI Assistants
@@ -162,9 +139,7 @@ The `skills/*/SKILL.md` files follow the universal skill format:
 
 ```bash
 # Copy all skills for Gemini CLI
-for plugin in pm-*/; do
-  cp -r "$plugin/skills/"* ~/.gemini/skills/ 2>/dev/null
-done
+cp -r pm-brain/skills/* ~/.gemini/skills/ 2>/dev/null
 ```
 
 ## What's Different from pm-skills
@@ -172,8 +147,8 @@ done
 | | pm-skills (v1) | Product OS (v2) |
 |--|---------------|----------------|
 | Architecture | 8 silos, 65 flat prompts | 6 agents + brain, shared context |
-| Entry point | Remember which plugin has which command | Single brain, 10 commands |
-| State | Stateless (start fresh every time) | 10 persistent context files |
+| Entry point | Remember which plugin has which command | Single brain, 11 commands |
+| State | Stateless (start fresh every time) | 12 persistent context files + session memory |
 | Output quality | Variable (40-222 lines per skill) | Consistent (all 100-460 lines, quality gates) |
 | Self-evaluation | None | Per-agent criteria + confidence scoring |
 | Tools | None | WebSearch, file I/O, MCP integrations |

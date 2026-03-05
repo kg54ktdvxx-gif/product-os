@@ -42,7 +42,7 @@ Product OS is a **layered prompt composition system**. There are no separate age
                     +-------------------------+
                     |     CONTEXT LAYER        |
                     |  .product-os/context/    |
-                    |   (10 persistent files)  |
+                    |  (12 persistent files)   |
                     +-------------------------+
 ```
 
@@ -50,17 +50,17 @@ Product OS is a **layered prompt composition system**. There are no separate age
 
 ## Plugin Structure
 
-Product OS is distributed as a Claude Code marketplace with 6 plugins:
+Product OS is distributed as a single Claude Code plugin. One install, everything included.
 
 ```
 product-os/                              # Marketplace root
-  .claude-plugin/marketplace.json        # Registry — lists all 6 plugins
+  .claude-plugin/marketplace.json        # Registry — lists the single plugin
   CLAUDE.md                              # System instructions (10 rules)
   ARCHITECTURE.md                        # This document
   README.md                              # User-facing documentation
   validate_plugins.py                    # Structural validation
 
-  pm-brain/                              # Coordinator — ALL 10 commands
+  pm-brain/                              # Single plugin — all commands + all skills
     .claude-plugin/plugin.json
     commands/
       think.md                           # Strategic reasoning
@@ -73,14 +73,14 @@ product-os/                              # Marketplace root
       build.md                           # → Executor skills
       launch.md                          # → Growth skills
       measure.md                         # → Analyst skills
+      log.md                             # Record outcomes, extract learnings
     skills/
+      # Brain (3 skills)
       coordinator/SKILL.md               # Brain agent definition
       context-manager/SKILL.md           # Context layer management
       getting-started/SKILL.md           # First-run onboarding
 
-  pm-strategist/                         # Skills only — no commands
-    .claude-plugin/plugin.json
-    skills/
+      # Strategist (6 skills)
       strategist/SKILL.md               # Agent definition
       product-strategy/SKILL.md         # Vision, strategy canvas, positioning
       competitive-analysis/SKILL.md     # Porter's, PESTLE, SWOT, Ansoff
@@ -88,20 +88,16 @@ product-os/                              # Marketplace root
       market-assessment/SKILL.md        # Sizing, segments, journey maps
       positioning/SKILL.md              # April Dunford, value prop, pricing
 
-  pm-discoverer/                         # Skills only — no commands
-    .claude-plugin/plugin.json
-    skills/
-      discoverer/SKILL.md
+      # Discoverer (6 skills)
+      discoverer/SKILL.md               # Agent definition
       discovery-cycle/SKILL.md          # Brainstorming (new + existing products)
       assumption-testing/SKILL.md       # Identify, prioritize, validate
       opportunity-mapping/SKILL.md      # OST, metrics dashboard
       user-research/SKILL.md            # Interview scripts, synthesis
       feature-prioritization/SKILL.md   # RICE, WSJF, MoSCoW, ICE + requests
 
-  pm-executor/                           # Skills only — no commands
-    .claude-plugin/plugin.json
-    skills/
-      executor/SKILL.md
+      # Executor (8 skills)
+      executor/SKILL.md                 # Agent definition
       prd/SKILL.md                      # Auto-populated from context
       okrs-roadmap/SKILL.md             # OKRs + 9 prioritization frameworks
       sprint-delivery/SKILL.md          # Sprint, retro, release, pre-mortem
@@ -110,20 +106,16 @@ product-os/                              # Marketplace root
       backlog-items/SKILL.md            # User stories, job stories, WWA
       ai-product-management/SKILL.md    # AI-native PM practices
 
-  pm-growth/                             # Skills only — no commands
-    .claude-plugin/plugin.json
-    skills/
-      growth/SKILL.md
+      # Growth (6 skills)
+      growth/SKILL.md                   # Agent definition
       gtm-strategy/SKILL.md            # GTM, beachhead, ICP, motions
       growth-engines/SKILL.md           # Growth loops, NSM, PLG playbook
       battlecards/SKILL.md              # Competitive battlecards
       launch-readiness/SKILL.md         # 8-dimension launch checklist
       retention/SKILL.md                # Churn, engagement, pricing experiments
 
-  pm-analyst/                            # Skills only — no commands
-    .claude-plugin/plugin.json
-    skills/
-      analyst/SKILL.md
+      # Analyst (5 skills)
+      analyst/SKILL.md                  # Agent definition
       metrics-definition/SKILL.md       # NSM, dashboards, precision protocol
       sql-analytics/SKILL.md            # SQL generation, cohort analysis
       experiment-design/SKILL.md        # A/B tests, pre-registration
@@ -132,7 +124,7 @@ product-os/                              # Marketplace root
 
 ### Key Structural Decisions
 
-1. **All commands in pm-brain.** Users install the brain and get all 10 commands. Specialist plugins provide skills only — they have no commands directory.
+1. **Single plugin, everything included.** Users run two commands: add the marketplace, install the plugin. All 34 skills and 11 commands come in one package.
 
 2. **Skills, not knowledge.** Each specialist's domain files are structured as `skills/[skill-name]/SKILL.md` following the Claude Code plugin format. The agent definition file (e.g., `strategist/SKILL.md`) acts as the orchestrator for that domain's skills.
 
@@ -160,6 +152,8 @@ Context files live in the **user's project directory**, not the plugin install d
       decisions.md              # Brain owns — decision log
       roadmap.md                # Executor owns
       outcomes.md               # Brain owns — feedback loop
+      activity-log.md           # Brain owns — session history
+      learnings.md              # Brain owns — compound knowledge
 ```
 
 ### Ownership Model
@@ -176,19 +170,30 @@ Context files live in the **user's project directory**, not the plugin install d
 | decisions.md | Brain | All agents | Significant decision made |
 | roadmap.md | Executor | Brain, Growth | Planning completed |
 | outcomes.md | Brain | All agents | Results logged (feedback loop) |
+| activity-log.md | Brain | All agents (last 3) | End of every command |
+| learnings.md | Brain | All agents | Insight proven by evidence |
 
 ### Selective Loading
 
-Not all 10 files are loaded on every request. The context-manager skill defines which files to load per domain:
+Memory files are loaded for ALL domains. Domain-specific files load selectively.
 
-| Task Domain | Always Load | Load If Available | Skip |
-|------------|------------|-------------------|------|
-| Strategy | product-brief.md | personas.md, metrics.md, competitive-landscape.md | roadmap.md, opportunity-tree.md |
-| Discovery | product-brief.md | strategy.md, assumptions.md, metrics.md | competitive-landscape.md, roadmap.md |
-| Execution | product-brief.md | strategy.md, personas.md, metrics.md, assumptions.md | competitive-landscape.md |
-| Growth | product-brief.md | strategy.md, personas.md, competitive-landscape.md | opportunity-tree.md, assumptions.md |
-| Analytics | product-brief.md | strategy.md, assumptions.md | personas.md, competitive-landscape.md |
-| Status | product-brief.md | ALL (scan headers only, load full content selectively) | — |
+**Always loaded (all domains)**:
+- `product-brief.md` — full content
+- `learnings.md` — full content (compound knowledge)
+- `activity-log.md` — last 3 entries (session memory, anti-duplication)
+- `decisions.md` — last 5 entries (recent decisions)
+- `outcomes.md` — last 5 entries (feedback loop)
+
+**Domain-specific**:
+
+| Task Domain | Load If Available | Skip |
+|------------|-------------------|------|
+| Strategy | personas.md, metrics.md, competitive-landscape.md | roadmap.md, opportunity-tree.md |
+| Discovery | strategy.md, assumptions.md, metrics.md | competitive-landscape.md, roadmap.md |
+| Execution | strategy.md, personas.md, metrics.md, assumptions.md | competitive-landscape.md |
+| Growth | strategy.md, personas.md, competitive-landscape.md, assumptions.md | opportunity-tree.md |
+| Analytics | strategy.md, assumptions.md | personas.md, competitive-landscape.md |
+| Status | ALL (scan headers only, load full content selectively) | — |
 
 ### File Headers
 
@@ -265,7 +270,7 @@ This is mandatory. No exceptions.
 
 ## Commands
 
-All 10 commands live in pm-brain. Specialist plugins have no commands.
+All 11 commands live in pm-brain. Specialist plugins have no commands.
 
 | Command | Routes To | What It Does |
 |---------|----------|-------------|
@@ -279,6 +284,7 @@ All 10 commands live in pm-brain. Specialist plugins have no commands.
 | `/build [feature]` | Executor skills | PRD, user stories, sprint planning |
 | `/launch [product]` | Growth skills | GTM strategy, battlecards, launch plan |
 | `/measure [question]` | Analyst skills | Metrics, experiments, SQL, dashboards |
+| `/log [outcome]` | Brain | Record outcome, extract learning, close feedback loop |
 
 ---
 
@@ -387,8 +393,8 @@ When MCP servers are connected, agents use real data instead of asking users to 
 | Aspect | pm-skills (v1) | Product OS (v2) |
 |--------|---------------|-----------------|
 | Architecture | 8 silos, 65 flat prompts | 6 agents + brain, shared context |
-| Entry point | Remember which plugin has which command | Single brain, 10 commands |
-| State | Stateless (start fresh every time) | 10 persistent context files |
+| Entry point | Remember which plugin has which command | Single brain, 11 commands |
+| State | Stateless (start fresh every time) | 12 persistent context files + session memory |
 | Output quality | Variable (40-222 lines per skill) | Consistent (100-460 lines, quality gates) |
 | Self-evaluation | None | Per-agent criteria + confidence scoring |
 | Tools | None | WebSearch, file I/O, MCP integrations |
