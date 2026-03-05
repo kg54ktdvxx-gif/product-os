@@ -1,11 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "product-os",
-  "version": "2.0.0",
-  "description": "AI-native PM operating system. 6 coordinated agents with persistent product context, self-evaluation, tool integration, and cross-agent workflows. Single entry point through the Brain — all 10 commands route through the coordinator.",
   "owner": {
-    "name": "Owen McLoughlin",
-    "url": "https://github.com/kg54ktdvxx-gif"
+    "name": "Owen McLoughlin"
+  },
+  "metadata": {
+    "description": "AI-native PM operating system. 6 coordinated agents with persistent product context, quality gates, and cross-agent workflows.",
+    "version": "2.0.0"
   },
   "plugins": [
     {
@@ -28,7 +28,7 @@
     },
     {
       "name": "pm-executor",
-      "description": "Execution skills: PRDs, OKRs, roadmaps, sprints, user stories, stakeholder management, technical specs, AI product management. No commands — invoked through /build.",
+      "description": "Execution skills: PRDs, OKRs, roadmaps, sprints, user stories, stakeholder management, technical specs, AI PM. No commands — invoked through /build.",
       "source": "./pm-executor",
       "category": "product-management"
     },
@@ -44,6 +44,5 @@
       "source": "./pm-analyst",
       "category": "product-management"
     }
-  ],
-  "repository": "https://github.com/kg54ktdvxx-gif/product-os"
+  ]
 }
