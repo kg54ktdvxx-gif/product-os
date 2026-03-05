@@ -1,4 +1,5 @@
 ---
+name: update
 description: Intake new information into the product context layer — research, decisions, competitive intel, or feedback
 argument-hint: "<new information or context>"
 ---

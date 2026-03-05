@@ -16,11 +16,11 @@ This is the most important section. Before writing any PRD section, check the co
 | PRD Section | Primary Source | Secondary Source | If Missing |
 |-------------|---------------|-----------------|------------|
 | Background & Context | `product-brief.md` | `strategy.md` | Flag: "No product brief found. Background is based on user-provided description only." |
-| Market Segments | `personas.md` | `market-research.md` | Flag: "No validated personas. Segments are hypothetical." |
+| Market Segments | `personas.md` | `competitive-landscape.md` | Flag: "No validated personas. Segments are hypothetical." |
 | Value Propositions | `strategy.md` (value prop section) | `product-brief.md` | Flag: "No strategy doc. Value props are assumed." |
 | Objective & Key Results | `metrics.md` | `strategy.md` (goals) | Flag: "No metrics baseline. Targets are estimated." |
-| Assumptions | `assumptions.md` | Interview notes | Flag: "No assumption tracking. All assumptions in this PRD are unvalidated." |
-| Competitive Context | `strategy.md` (competitive section) | `market-research.md` | Flag: "No competitive analysis available." |
+| Assumptions | `assumptions.md` | `opportunity-tree.md` | Flag: "No assumption tracking. All assumptions in this PRD are unvalidated." |
+| Competitive Context | `strategy.md` (competitive section) | `competitive-landscape.md` | Flag: "No competitive analysis available." |
 
 **Rule**: If you reference a persona, metric, or strategic position that does not exist in the context files, you MUST flag it with a `[UNVALIDATED]` tag.
 
@@ -85,7 +85,7 @@ For each segment, specify:
 - Which persona from `personas.md`
 - Their relevant jobs-to-be-done
 - Current workaround and pain level
-- Size of segment (from `market-research.md` if available)
+- Size of segment (from `competitive-landscape.md` if available)
 
 ### Section 6: Value Propositions
 

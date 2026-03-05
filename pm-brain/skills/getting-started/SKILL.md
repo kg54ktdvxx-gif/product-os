@@ -43,7 +43,7 @@ If the user describes their product without using `/brief`, extract what you can
 
 1. Create `.product-os/context/` directory
 2. Write `product-brief.md` from what they provided
-3. Create remaining 8 context files with empty headers
+3. Create remaining 9 context files with empty headers
 4. Confirm what was created and suggest first actions based on product stage
 
 ## Setup Principles

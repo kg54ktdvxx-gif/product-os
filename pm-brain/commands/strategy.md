@@ -1,4 +1,5 @@
 ---
+name: strategy
 description: Run a full product strategy workflow — competitive analysis, strategy canvas, positioning, and documentation
 argument-hint: "<product or strategic question>"
 ---

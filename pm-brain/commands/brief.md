@@ -1,4 +1,5 @@
 ---
+name: brief
 description: Initialize or update the product brief — the foundation context that all agents reference
 argument-hint: "<product name or description>"
 ---
@@ -37,7 +38,7 @@ Follow the schema from the context-manager skill. Keep it to one page.
 
 ### Step 3: Initialize Empty Context Files
 
-Create the remaining 8 context files with headers and empty status. Don't force the user to fill them — agents will populate them as work happens.
+Create the remaining 9 context files with headers and empty status. Don't force the user to fill them — agents will populate them as work happens.
 
 ### Step 4: Suggest First Actions
 

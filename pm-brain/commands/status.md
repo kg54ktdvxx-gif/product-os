@@ -1,11 +1,12 @@
 ---
+name: status
 description: Synthesize current product state across all context files — what's defined, what's missing, what's stale, and what to do next
 argument-hint: ""
 ---
 
 # /status — Product State Synthesis
 
-Read all 9 context files and produce a one-page state-of-the-product summary with prioritized next actions.
+Read all 10 context files and produce a one-page state-of-the-product summary with prioritized next actions.
 
 ## Invocation
 

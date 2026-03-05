@@ -179,12 +179,11 @@ Update the following files based on the discovery plan:
 Based on the discovery plan, suggest concrete next actions routed to the appropriate agent or activity:
 
 - "Run the planned experiments" -> Discoverer (self)
-- "Prepare interview scripts to supplement Experiment #2" -> `/interview prep [topic]`
-- "Draft a PRD for the top idea (after validation)" -> Executor agent
-- "Update the product strategy to reflect these findings" -> Strategist agent
-- "Set up metrics to track experiment outcomes" -> `/setup-metrics [topic]`
-- "Triage the feature requests that informed this analysis" -> `/triage-requests`
-- "Prioritize the validated features for the roadmap" -> `/prioritize [features]`
+- "Prepare interview scripts to supplement Experiment #2" -> `/discover interview prep [topic]`
+- "Draft a PRD for the top idea (after validation)" -> `/build [feature]`
+- "Update the product strategy to reflect these findings" -> `/strategy [topic]`
+- "Set up metrics to track experiment outcomes" -> `/measure [topic]`
+- "Prioritize the validated features for the roadmap" -> `/build prioritize [features]`
 
 ## Quality Checklist (Before Delivering)
 

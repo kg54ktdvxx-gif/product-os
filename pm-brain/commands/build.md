@@ -28,8 +28,8 @@ Before producing anything, read every available context file in this order:
 4. `metrics.md` -- current metrics, baselines, targets, KPIs, North Star Metric
 5. `assumptions.md` -- validated and unvalidated assumptions
 6. `roadmap.md` -- current roadmap (to check for conflicts and alignment)
-7. `market-research.md` -- market sizing, competitive landscape
-8. `interview-notes.md` -- raw user research, if available
+7. `competitive-landscape.md` -- competitive intelligence, market dynamics
+8. `opportunity-tree.md` -- discovery state, opportunities, solutions
 
 For each file that exists, extract relevant information for the build. For each file that does NOT exist, note it as a context gap:
 

@@ -1,4 +1,5 @@
 ---
+name: think
 description: Strategic reasoning about a product question — the Coordinator and relevant specialist agents think through it together
 argument-hint: "<question or decision to think through>"
 ---

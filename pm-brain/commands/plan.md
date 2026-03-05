@@ -1,4 +1,5 @@
 ---
+name: plan
 description: Decompose a complex outcome into a sequenced plan of agent tasks — the Coordinator designs the workflow
 argument-hint: "<desired outcome>"
 ---
