@@ -122,30 +122,28 @@ When connected, agents use real data instead of asking you to copy-paste:
 
 ## Installation
 
-### Claude Code (CLI)
+### Claude Code (recommended)
 
 ```bash
-# Add the marketplace
-claude plugin marketplace add YOUR_USERNAME/product-os
+# Clone the repo
+git clone https://github.com/kg54ktdvxx-gif/product-os.git
 
-# Install the brain (gets all commands)
-claude plugin install pm-brain@product-os
-
-# Install specialist skills
-claude plugin install pm-strategist@product-os
-claude plugin install pm-discoverer@product-os
-claude plugin install pm-executor@product-os
-claude plugin install pm-growth@product-os
-claude plugin install pm-analyst@product-os
+# Load all plugins (brain + 5 specialists)
+claude --plugin-dir /path/to/product-os/pm-brain \
+       --plugin-dir /path/to/product-os/pm-strategist \
+       --plugin-dir /path/to/product-os/pm-discoverer \
+       --plugin-dir /path/to/product-os/pm-executor \
+       --plugin-dir /path/to/product-os/pm-growth \
+       --plugin-dir /path/to/product-os/pm-analyst
 ```
 
-### Claude Cowork
+Or load just the brain (gets all 10 commands):
 
-1. Open **Customize** > **Browse plugins** > **Personal** > **+**
-2. Select **Add marketplace from GitHub**
-3. Enter: `YOUR_USERNAME/product-os`
+```bash
+claude --plugin-dir /path/to/product-os/pm-brain
+```
 
-All 6 plugins install automatically.
+> **Note**: The brain has the commands; specialist plugins add deeper skill context. For the full system, load all 6.
 
 ### Other AI Assistants
 

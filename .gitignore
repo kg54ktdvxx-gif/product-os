@@ -1,0 +1,18 @@
+# Product context (lives in user's project, not the plugin repo)
+.product-os/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

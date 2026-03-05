@@ -1,7 +1,7 @@
 {
   "name": "pm-analyst",
   "version": "2.0.0",
-  "description": "Product Analyst agent \u2014 owns metrics definition, SQL generation, A/B test analysis, cohort analysis, experiment design, and analytics instrumentation. Ensures teams make decisions based on data, not gut feel.",
+  "description": "Product Analyst agent — owns metrics definition, SQL generation, A/B test analysis, cohort analysis, experiment design, and analytics instrumentation. Ensures teams make decisions based on data, not gut feel.",
   "keywords": [
     "metrics",
     "analytics",
@@ -17,6 +17,7 @@
   "license": "MIT",
   "author": {
     "name": "Owen McLoughlin",
-    "url": "https://github.com/owenmcloughlin"
-  }
+    "url": "https://github.com/kg54ktdvxx-gif"
+  },
+  "repository": "https://github.com/kg54ktdvxx-gif/product-os"
 }

@@ -1,7 +1,7 @@
 {
   "name": "pm-strategist",
   "version": "2.0.0",
-  "description": "Product Strategist agent \u2014 owns positioning, competitive dynamics, market assessment, business models, and pricing. Consolidates 19 skills from pm-product-strategy and pm-market-research into 5 deep knowledge areas with an opinionated agent definition.",
+  "description": "Product Strategist agent — owns positioning, competitive dynamics, market assessment, business models, and pricing. Consolidates 19 skills from pm-product-strategy and pm-market-research into 5 deep knowledge areas with an opinionated agent definition.",
   "keywords": [
     "product-strategy",
     "competitive-analysis",
@@ -17,6 +17,7 @@
   "license": "MIT",
   "author": {
     "name": "Owen McLoughlin",
-    "url": "https://github.com/owenmcloughlin"
-  }
+    "url": "https://github.com/kg54ktdvxx-gif"
+  },
+  "repository": "https://github.com/kg54ktdvxx-gif/product-os"
 }

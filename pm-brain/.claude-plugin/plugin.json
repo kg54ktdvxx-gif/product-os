@@ -4,7 +4,7 @@
   "description": "PM Chief of Staff — the command hub and orchestration layer. All 10 commands live here. Routes to specialist agents, manages persistent product context, enforces quality gates.",
   "author": {
     "name": "Owen McLoughlin",
-    "url": "https://github.com/owenmcloughlin"
+    "url": "https://github.com/kg54ktdvxx-gif"
   },
   "keywords": [
     "product-management",
@@ -17,5 +17,6 @@
     "growth",
     "analytics"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "https://github.com/kg54ktdvxx-gif/product-os"
 }

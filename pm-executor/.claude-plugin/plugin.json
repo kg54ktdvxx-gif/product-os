@@ -1,7 +1,7 @@
 {
   "name": "pm-executor",
   "version": "2.0.0",
-  "description": "Product Executor agent \u2014 owns the bridge between strategy and shipping. PRDs, OKRs, roadmaps, sprints, user stories, stakeholder management, technical specifications, and executive communication. Turns decisions into deliverables and ensures nothing falls through the cracks.",
+  "description": "Product Executor agent — owns the bridge between strategy and shipping. PRDs, OKRs, roadmaps, sprints, user stories, stakeholder management, technical specifications, and executive communication. Turns decisions into deliverables and ensures nothing falls through the cracks.",
   "keywords": [
     "product-management",
     "prd",
@@ -21,6 +21,7 @@
   "license": "MIT",
   "author": {
     "name": "Owen McLoughlin",
-    "url": "https://github.com/owenmcloughlin"
-  }
+    "url": "https://github.com/kg54ktdvxx-gif"
+  },
+  "repository": "https://github.com/kg54ktdvxx-gif/product-os"
 }

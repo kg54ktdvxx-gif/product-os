@@ -1,7 +1,7 @@
 {
   "name": "pm-discoverer",
   "version": "2.0.0",
-  "description": "Product Discoverer agent \u2014 owns user research synthesis, assumption testing, opportunity mapping, experiment design, and feature prioritization. Ensures the team builds things users actually want.",
+  "description": "Product Discoverer agent — owns user research synthesis, assumption testing, opportunity mapping, experiment design, and feature prioritization. Ensures the team builds things users actually want.",
   "keywords": [
     "product-discovery",
     "user-research",
@@ -17,6 +17,7 @@
   "license": "MIT",
   "author": {
     "name": "Owen McLoughlin",
-    "url": "https://github.com/owenmcloughlin"
-  }
+    "url": "https://github.com/kg54ktdvxx-gif"
+  },
+  "repository": "https://github.com/kg54ktdvxx-gif/product-os"
 }
