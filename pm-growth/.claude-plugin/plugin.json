@@ -1,0 +1,28 @@
+{
+  "name": "pm-growth",
+  "version": "2.0.0",
+  "description": "Product Growth agent \u2014 owns GTM strategy, launch planning, growth loops, positioning, competitive battlecards, product-led growth, and retention strategy. Consolidates 11 skills from pm-go-to-market and pm-marketing-growth with significant new capabilities including launch readiness, retention frameworks, PLG playbooks, and pricing experiments.",
+  "keywords": [
+    "growth",
+    "go-to-market",
+    "gtm",
+    "launch",
+    "positioning",
+    "battlecard",
+    "competitive",
+    "retention",
+    "product-led-growth",
+    "plg",
+    "marketing",
+    "north-star",
+    "growth-loops",
+    "beachhead",
+    "icp",
+    "pricing"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Owen McLoughlin",
+    "url": "https://github.com/owenmcloughlin"
+  }
+}

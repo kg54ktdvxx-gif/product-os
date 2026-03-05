@@ -1,0 +1,21 @@
+{
+  "name": "pm-brain",
+  "version": "2.0.0",
+  "description": "PM Chief of Staff — the command hub and orchestration layer. All 10 commands live here. Routes to specialist agents, manages persistent product context, enforces quality gates.",
+  "author": {
+    "name": "Owen McLoughlin",
+    "url": "https://github.com/owenmcloughlin"
+  },
+  "keywords": [
+    "product-management",
+    "coordinator",
+    "orchestration",
+    "context",
+    "strategy",
+    "discovery",
+    "execution",
+    "growth",
+    "analytics"
+  ],
+  "license": "MIT"
+}
